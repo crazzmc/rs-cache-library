@@ -2,6 +2,9 @@ apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'maven-publish'
+
+apply plugin: 'application'
 
 buildscript {
     ext.kotlin_version = '1.3.61'
@@ -66,40 +69,42 @@ signing {
     sign configurations.archives
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-            pom.project {
-                name rootProject.getName()
-                packaging 'jar'
-                description description
-                url 'https://github.com/Displee/rs-cache-library'
-                scm {
-                    connection 'scm:git:git://github.com/Displee/rs-cache-library.git'
-                    developerConnection 'scm:git:ssh://git@github.com/Displee/rs-cache-library.git'
-                    url 'https://github.com/Displee/rs-cache-library'
-                }
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://github.com/Displee/rs-cache-library/blob/master/LICENSE'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'Displee'
-                        name 'Yassin Amhagi'
-                        email 'displee@hotmail.com'
-                    }
-                }
-            }
-        }
-    }
-}
+mainClassName = 'com.displee.Main'
+
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+////            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+//            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+//                authentication(userName: ossrhUsername, password: ossrhPassword)
+//            }
+//            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+//                authentication(userName: ossrhUsername, password: ossrhPassword)
+//            }
+//            pom.project {
+//                name rootProject.getName()
+//                packaging 'jar'
+//                description description
+//                url 'https://github.com/Displee/rs-cache-library'
+//                scm {
+//                    connection 'scm:git:git://github.com/Displee/rs-cache-library.git'
+//                    developerConnection 'scm:git:ssh://git@github.com/Displee/rs-cache-library.git'
+//                    url 'https://github.com/Displee/rs-cache-library'
+//                }
+//                licenses {
+//                    license {
+//                        name 'MIT License'
+//                        url 'https://github.com/Displee/rs-cache-library/blob/master/LICENSE'
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id 'Displee'
+//                        name 'Yassin Amhagi'
+//                        email 'displee@hotmail.com'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
