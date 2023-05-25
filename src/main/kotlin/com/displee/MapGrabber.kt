@@ -13,9 +13,9 @@ class MapGrabber {
 
         @JvmStatic
         fun main(args: Array<String>) {
-//            pack()
+            pack()
 //            get()
-            export()
+//            export()
 //            replace()
 //            val pack = false
 //            if (pack) pack() else get()
@@ -32,7 +32,7 @@ class MapGrabber {
                     val nameBefore = it.name.substringBefore(".")
                     var toInt = nameBefore.toInt()
                     println("Packing ${it.name} to slot $toInt")
-                    cache.put(12, toInt, Files.readAllBytes(it.toPath()))
+                    cache.put(5, toInt, Files.readAllBytes(it.toPath()))
                 }
             }
             maps.update()
