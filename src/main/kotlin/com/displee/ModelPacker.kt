@@ -1,7 +1,6 @@
 package com.displee
 
 import com.displee.cache.CacheLibrary
-import jdk.internal.org.jline.utils.Colors.s
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -19,8 +18,9 @@ class ModelPacker {
         val newCachePath = System.getProperty("user.dir") + "/new_cache/" //only used if using the transfer function
         val newCache = CacheLibrary.create(newCachePath)
         val newModels = newCache.index(7)
-        var startIndex = 0; //First model to rip from one cache
-        var newCacheStartindex = 0; //Set offset here if you want to move from lets say 42568 but start at 60000
+        var startIndex = 47425 //First model to rip from one cache
+        var endIndex = 47443
+        var newCacheStartindex = 60000; //Set offset here if you want to move from lets say 42568 but start at 60000
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -30,7 +30,8 @@ class ModelPacker {
 //            export()
 //            replace()
 //            export()
-            transfer()
+//            transfer()
+            delete()
         }
 
         private fun transfer() {
@@ -69,6 +70,13 @@ class ModelPacker {
 
         private fun get() {
             println("Last model id ${models.archiveIds().last()}")
+        }
+
+        private fun delete() {
+            for (id in startIndex.. endIndex) {
+                cache.remove(7, id)
+            }
+            models.update()
         }
 
         private fun replace() { //replaces models starting at the startIndex
